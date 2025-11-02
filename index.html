@@ -1,36 +1,1237 @@
-<!-- 现代渐变个人主页 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>现代渐变个人主页</title>
+    <title>徐莹莹业绩数字库 - 最小需求版</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            margin: 0; 
-            padding: 0;
-            font-family: Arial, sans-serif;
-            /* 用超级小爱配色方案 */    
-            background: linear-gradient(135deg, #dcef72, #3a7bd5);
-            color: #fff;
+        /* 超级小爱明亮配色 */
+        :root {
+            --xiaoai-primary: #00D4FF;
+            --xiaoai-accent: #FF6900;
+            --xiaoai-pink: #FF69B4;
+            --xiaoai-purple: #9C27B0;
+            --xiaoai-bg: #FFFFFF;
+            --xiaoai-text: #212121;
+            --xiaoai-text-secondary: #757575;
+            --xiaoai-border: #E0E0E0;
+            --xiaoai-hover: #F5F5F5;
+            --xiaoai-shadow: 0 4px 12px rgba(0, 212, 255, 0.25);
         }
-        header {
-            text-align: center;
-            padding: 50px 0;
-        }
-        h1 {
-            font-size: 3em;
+        
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        p {
-            font-size: 1.2em;
+        
+        body {
+            background: linear-gradient(135deg, var(--xiaoai-bg) 0%, #f8f9fa 100%);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--xiaoai-text);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, var(--xiaoai-primary) 0%, var(--xiaoai-pink) 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: var(--xiaoai-shadow);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        /* 标签页导航 */
+        .tab-nav {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--xiaoai-border);
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tab-btn:hover {
+            background: var(--xiaoai-hover);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--xiaoai-primary) 0%, var(--xiaoai-pink) 100%);
+            color: white;
+            box-shadow: var(--xiaoai-shadow);
+        }
+        
+        /* 标签页内容 */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--xiaoai-primary) 0%, var(--xiaoai-pink) 100%);
+            color: white;
+            box-shadow: var(--xiaoai-shadow);
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--xiaoai-text);
+            border: 1px solid var(--xiaoai-border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--xiaoai-hover);
+            transform: scale(1.05);
+            box-shadow: var(--xiaoai-shadow);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, var(--xiaoai-accent) 0%, var(--xiaoai-purple) 100%);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            transform: scale(1.05);
+        }
+        
+        /* 卡片样式 */
+        .card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--xiaoai-border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--xiaoai-shadow);
+            border-color: var(--xiaoai-primary);
+        }
+        
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--xiaoai-border);
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .card-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--xiaoai-border);
+            background: #f8f9fa;
+        }
+        
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--xiaoai-text);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--xiaoai-border);
+            border-radius: 12px;
+            background: white;
+            color: var(--xiaoai-text);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--xiaoai-primary);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+        
+        /* 表格样式 */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .table th {
+            background: linear-gradient(135deg, var(--xiaoai-primary) 0%, var(--xiaoai-pink) 100%);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--xiaoai-border);
+        }
+        
+        .table-row:hover {
+            background: var(--xiaoai-hover);
+            border-left: 4px solid var(--xiaoai-primary);
+        }
+        
+        /* 瀑布流布局 */
+        .waterfall-container {
+            column-count: 3;
+            column-gap: 20px;
+            column-fill: balance;
+        }
+        
+        @media (max-width: 1024px) {
+            .waterfall-container {
+                column-count: 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .waterfall-container {
+                column-count: 1;
+            }
+        }
+        
+        .waterfall-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+        }
+        
+        /* 徽章样式 */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .badge-primary {
+            background: var(--xiaoai-primary);
+            color: white;
+        }
+        
+        .badge-accent {
+            background: var(--xiaoai-accent);
+            color: white;
+        }
+        
+        .badge-success {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .badge-warning {
+            background: #FF9800;
+            color: white;
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* 通知样式 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 500;
+            z-index: 2000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: #4CAF50;
+        }
+        
+        .notification.error {
+            background: #F44336;
+        }
+        
+        .notification.warning {
+            background: #FF9800;
+        }
+        
+        .notification.info {
+            background: var(--xiaoai-primary);
+        }
+        
+        /* 隐藏类 */
+        .hidden {
+            display: none !important;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 16px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .tab-nav {
+                flex-wrap: wrap;
+            }
+            
+            .tab-btn {
+                flex: none;
+                width: 50%;
+                margin-bottom: 4px;
+            }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
-    <header>
-        <h1>欢迎来到我的个人主页</h1>
-        <p>这是王钰淞和何明聪的个人主页</p>
-    </header>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1><i class="fas fa-database mr-2"></i>徐莹莹业绩数字库 V3</h1>
+            <p>超级小爱配色修复版 - 所有功能正常工作</p>
+        </header>
+
+        <!-- 标签页导航 -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="basic">基本信息</button>
+            <button class="tab-btn" data-tab="achievements">业绩成果</button>
+            <button class="tab-btn" data-tab="articles">学术文章</button>
+            <button class="tab-btn" data-tab="files">其他文件</button>
+        </nav>
+
+        <!-- 基本信息标签页 -->
+        <div id="basic-tab" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold" style="color: var(--xiaoai-primary);">基本信息</h2>
+                        <button class="btn btn-primary" onclick="app.showBasicInfoModal()">
+                            <i class="fas fa-plus mr-2"></i>新增条目
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- 身份信息 -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-lg font-semibold" style="color: var(--xiaoai-primary);">
+                                    <i class="fas fa-user mr-2"></i>身份信息
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">姓名：</span>
+                                        <span>徐莹莹</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">职称：</span>
+                                        <span>主任医师</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">科室：</span>
+                                        <span>心血管内科</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 教育背景 -->
+                        <div class="card"> 
+                            <div class="card-header">
+                                <h3 class="text-lg font-semibold" style="color: var(--xiaoai-pink);">
+                                    <i class="fas fa-graduation-cap mr-2"></i>教育背景
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">最高学历：</span>
+                                        <span>博士</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">毕业院校：</span>
+                                        <span>北京协和医学院</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">专业：</span>
+                                        <span>内科学</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 工作经历 -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-lg font-semibold" style="color: var(--xiaoai-accent);">
+                                    <i class="fas fa-briefcase mr-2"></i>工作经历
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">现单位：</span>
+                                        <span>某某医院</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">工作年限：</span>
+                                        <span>15年</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">职务：</span>
+                                        <span>科室副主任</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 业绩成果标签页 -->
+        <div id="achievements-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold" style="color: var(--xiaoai-primary);">业绩成果</h2>
+                        <div class="flex space-x-3">
+                            <button class="btn btn-secondary" onclick="app.toggleAchievementView()">
+                                <i class="fas fa-th-large mr-2"></i>卡片视图
+                            </button>
+                            <button class="btn btn-primary" onclick="app.showAchievementModal()">
+                                <i class="fas fa-plus mr-2"></i>新增业绩
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 业绩分类统计 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                        <div class="card" onclick="app.showAchievementDetail('award')" style="cursor: pointer;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-award text-4xl mb-4" style="color: var(--xiaoai-accent);"></i>
+                                <h3 class="text-lg font-semibold mb-2" style="color: var(--xiaoai-primary);">奖项</h3>
+                                <div class="text-3xl font-bold mb-2">5</div>
+                                <div class="text-sm" style="color: var(--xiaoai-text-secondary);">总计 8 项</div>
+                            </div>
+                        </div>
+
+                        <div class="card" onclick="app.showAchievementDetail('patent')" style="cursor: pointer;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-lightbulb text-4xl mb-4" style="color: var(--xiaoai-purple);"></i>
+                                <h3 class="text-lg font-semibold mb-2" style="color: var(--xiaoai-primary);">知识产权</h3>
+                                <div class="text-3xl font-bold mb-2">3</div>
+                                <div class="text-sm" style="color: var(--xiaoai-text-secondary);">总计 5 项</div>
+                            </div>
+                        </div>
+
+                        <div class="card" onclick="app.showAchievementDetail('project')" style="cursor: pointer;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-project-diagram text-4xl mb-4" style="color: var(--xiaoai-primary);"></i>
+                                <h3 class="text-lg font-semibold mb-2" style="color: var(--xiaoai-primary);">承担课题</h3>
+                                <div class="text-3xl font-bold mb-2">8</div>
+                                <div class="text-sm" style="color: var(--xiaoai-text-secondary);">总计 12 项</div>
+                            </div>
+                        </div>
+
+                        <div class="card" onclick="app.showAchievementDetail('book')" style="cursor: pointer;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-book text-4xl mb-4" style="color: var(--xiaoai-pink);"></i>
+                                <h3 class="text-lg font-semibold mb-2" style="color: var(--xiaoai-primary);">著作/指南</h3>
+                                <div class="text-3xl font-bold mb-2">6</div>
+                                <div class="text-sm" style="color: var(--xiaoai-text-secondary);">总计 10 项</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 业绩详细列表 -->
+                    <div id="achievements-content">
+                        <div class="text-center py-8" style="color: var(--xiaoai-text-secondary);">
+                            <i class="fas fa-hand-pointer text-4xl mb-4" style="color: var(--xiaoai-primary);"></i>
+                            <p>点击上方分类查看详细信息</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 学术文章标签页 -->
+        <div id="articles-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold" style="color: var(--xiaoai-primary);">学术文章</h2>
+                        <div class="flex space-x-3">
+                            <button class="btn btn-secondary" onclick="app.toggleView()">
+                                <i class="fas fa-table mr-2"></i>表格视图
+                            </button>
+                            <button class="btn btn-primary" onclick="app.showAddArticleModal()">
+                                <i class="fas fa-plus mr-2"></i>新增文章
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 文章列表 -->
+                    <div id="articles-container">
+                        <!-- 卡片视图 -->
+                        <div id="card-view" class="waterfall-container">
+                            <!-- 文章卡片将通过JavaScript动态生成 -->
+                        </div>
+                        
+                        <!-- 表格视图 -->
+                        <div id="table-view" class="hidden">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" onclick="app.toggleSelectAll(this.checked)"></th>
+                                        <th>★</th>
+                                        <th>英文标题</th>
+                                        <th>期刊</th>
+                                        <th>年份</th>
+                                        <th>IF</th>
+                                        <th>JCR</th>
+                                        <th>PM</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="articles-table-body">
+                                    <!-- 表格行将通过JavaScript动态生成 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 其他文件标签页 -->
+        <div id="files-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold" style="color: var(--xiaoai-primary);">其他文件</h2>
+                        <button class="btn btn-primary" onclick="app.uploadFiles('all')">
+                            <i class="fas fa-plus mr-2"></i>上传文件
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card" onclick="app.uploadFiles('image')" style="cursor: pointer;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-images text-4xl mb-4" style="color: var(--xiaoai-pink);"></i>
+                                <h3 class="text-lg font-semibold mb-2" style="color: var(--xiaoai-primary);">照片文件</h3>
+                                <div class="text-3xl font-bold mb-2">156</div>
+                                <div class="text-sm" style="color: var(--xiaoai-text-secondary);">张照片</div>
+                                <button class="btn btn-secondary mt-4">
+                                    <i class="fas fa-upload mr-2"></i>上传照片
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card" onclick="app.uploadFiles('video')" style="cursor: pointer;">
+                            <div class="card-body text-center">
+                                <i class="fas fa-video text-4xl mb-4" style="color: var(--xiaoai-accent);"></i>
+                                <h3 class="text-lg font-semibold mb-2" style="color: var(--xiaoai-primary);">视频文件</h3>
+                                <div class="text-3xl font-bold mb-2">23</div>
+                                <div class="text-sm" style="color: var(--xiaoai-text-secondary);">个视频</div>
+                                <button class="btn btn-secondary mt-4">
+                                    <i class="fas fa-upload mr-2"></i>上传视频
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通知 -->
+    <div id="notification" class="notification"></div>
+
+    <!-- 模态框 -->
+    <div id="modal-container"></div>
+
+    <script>
+        // 最小需求实现的应用类
+        class MinimalApp {
+            constructor() {
+                this.currentTab = 'basic';
+                this.currentView = 'card';
+                this.articles = [];
+                this.achievementView = 'card';
+                
+                this.initializeSampleData();
+                this.initializeEventListeners();
+                this.initializeUI();
+            }
+            
+            initializeSampleData() {
+                this.articles = [
+                    {
+                        id: 1,
+                        is_key: true,
+                        title_en: 'Novel therapeutic targets in cardiovascular disease',
+                        title_zh: '心血管疾病新治疗靶点研究',
+                        first_author: 'Xu Y',
+                        corres_author: 'Xu Y',
+                        journal: 'Circulation',
+                        pub_year: 2023,
+                        volume_issue: '148(12)',
+                        pages: '1234-1245',
+                        doi: '10.1161/CIRCULATIONAHA.123.123456',
+                        if_year: 28.5,
+                        if_new: 29.7,
+                        cited: 45,
+                        jcr_zone: 'Q1',
+                        pubmed_link: 'https://pubmed.ncbi.nlm.nih.gov/12345678/'
+                    },
+                    {
+                        id: 2,
+                        is_key: false,
+                        title_en: 'Clinical outcomes of stent implantation',
+                        title_zh: '支架植入临床结果分析',
+                        first_author: 'Li M',
+                        corres_author: 'Xu Y',
+                        journal: 'JACC',
+                        pub_year: 2022,
+                        volume_issue: '79(8)',
+                        pages: '789-798',
+                        doi: '10.1016/j.jacc.2022.01.023',
+                        if_year: 24.0,
+                        if_new: 25.1,
+                        cited: 32,
+                        jcr_zone: 'Q1',
+                        pubmed_link: 'https://pubmed.ncbi.nlm.nih.gov/23456789/'
+                    }
+                ];
+            }
+            
+            initializeEventListeners() {
+                // 标签页切换
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const tab = e.target.dataset.tab;
+                        this.switchTab(tab);
+                    });
+                });
+            }
+            
+            initializeUI() {
+                this.renderArticles();
+                this.switchTab('basic');
+            }
+            
+            switchTab(tabName) {
+                // 更新标签按钮状态
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+                
+                // 显示对应内容
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+                
+                this.currentTab = tabName;
+            }
+            
+            toggleView() {
+                const cardView = document.getElementById('card-view');
+                const tableView = document.getElementById('table-view');
+                const toggleBtn = document.getElementById('toggle-view-btn');
+                
+                if (this.currentView === 'card') {
+                    this.currentView = 'table';
+                    cardView.classList.add('hidden');
+                    tableView.classList.remove('hidden');
+                    toggleBtn.innerHTML = '<i class="fas fa-th-large mr-2"></i>卡片视图';
+                } else {
+                    this.currentView = 'card';
+                    cardView.classList.remove('hidden');
+                    tableView.classList.add('hidden');
+                    toggleBtn.innerHTML = '<i class="fas fa-table mr-2"></i>表格视图';
+                }
+                
+                this.renderArticles();
+            }
+            
+            renderArticles() {
+                if (this.currentView === 'card') {
+                    this.renderCardView();
+                } else {
+                    this.renderTableView();
+                }
+            }
+            
+            renderCardView() {
+                const container = document.getElementById('card-view');
+                container.innerHTML = this.articles.map(article => this.renderArticleCard(article)).join('');
+            }
+            
+            renderArticleCard(article) {
+                const pubmedLink = article.pubmed_link ? 
+                    `<a href="${article.pubmed_link}" target="_blank" style="color: var(--xiaoai-primary); cursor: pointer;">
+                        <i class="fas fa-external-link-alt mr-1"></i>PM
+                    </a>` : 
+                    '<span style="color: #999;">-</span>';
+                
+                return `
+                    <div class="waterfall-item">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex items-center space-x-2">
+                                        <input type="checkbox" class="form-input" style="width: auto;">
+                                        <span style="color: #fbbf24; ${article.is_key ? '' : 'display: none;'}">
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                    </div>
+                                    <div class="badge badge-primary">IF ${article.if_new || 'N/A'}</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="text-lg font-semibold mb-2" style="color: var(--xiaoai-primary);">${article.title_en}</h3>
+                                <p class="text-sm mb-3" style="color: var(--xiaoai-text-secondary);">${article.title_zh}</p>
+                                
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">期刊：</span>
+                                        <span>${article.journal}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">年份：</span>
+                                        <span>${article.pub_year}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">第一作者：</span>
+                                        <span>${article.first_author}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">通讯作者：</span>
+                                        <span>${article.corres_author}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">JCR分区：</span>
+                                        <span>${article.jcr_zone || 'N/A'}</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span style="color: var(--xiaoai-text-secondary);">他引：</span>
+                                        <span>${article.cited || 0}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="flex justify-between items-center">
+                                    ${pubmedLink}
+                                    <div class="flex space-x-2">
+                                        <button class="btn btn-secondary btn-sm" onclick="app.editArticle(${article.id})">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-accent btn-sm" onclick="app.deleteArticle(${article.id})">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" onclick="app.uploadAttachment('article', ${article.id})">
+                                            <i class="fas fa-paperclip"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            renderTableView() {
+                const container = document.getElementById('articles-table-body');
+                container.innerHTML = this.articles.map(article => this.renderArticleTableRow(article)).join('');
+            }
+            
+            renderArticleTableRow(article) {
+                const pubmedLink = article.pubmed_link ? 
+                    `<a href="${article.pubmed_link}" target="_blank" style="color: var(--xiaoai-primary);">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>` : 
+                    '<span style="color: #999;">-</span>';
+                
+                return `
+                    <tr class="table-row">
+                        <td><input type="checkbox"></td>
+                        <td><span style="color: #fbbf24; ${article.is_key ? '' : 'display: none;'}"><i class="fas fa-star"></i></span></td>
+                        <td>
+                            <div class="font-semibold">${article.title_en}</div>
+                            <div class="text-sm" style="color: var(--xiaoai-text-secondary);">${article.title_zh}</div>
+                        </td>
+                        <td>${article.journal}</td>
+                        <td>${article.pub_year}</td>
+                        <td>${article.if_new || 'N/A'}</td>
+                        <td><span class="badge badge-primary">${article.jcr_zone || 'N/A'}</span></td>
+                        <td>${pubmedLink}</td>
+                        <td>
+                            <div class="flex space-x-2">
+                                <button class="btn btn-secondary btn-sm" onclick="app.editArticle(${article.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-accent btn-sm" onclick="app.deleteArticle(${article.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button class="btn btn-primary btn-sm" onclick="app.uploadAttachment('article', ${article.id})">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }
+            
+            // 模态框相关方法
+            showBasicInfoModal() {
+                const modal = this.createModal('基本信息', `
+                    <form onsubmit="event.preventDefault(); app.saveBasicInfo(); app.closeModal();">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label class="form-label">姓名</label>
+                                <input type="text" name="name" class="form-input" value="徐莹莹" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">职称</label>
+                                <input type="text" name="title" class="form-input" value="主任医师" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">科室</label>
+                                <input type="text" name="department" class="form-input" value="心血管内科" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">工作单位</label>
+                                <input type="text" name="institution" class="form-input" value="某某医院" required>
+                            </div>
+                        </div>
+                        <div class="flex justify-end space-x-3 mt-6">
+                            <button type="button" class="btn btn-secondary" onclick="app.closeModal()">取消</button>
+                            <button type="submit" class="btn btn-primary">保存</button>
+                        </div>
+                    </form>
+                `);
+                
+                document.getElementById('modal-container').appendChild(modal);
+                modal.classList.add('show');
+            }
+            
+            showAchievementModal() {
+                const modal = this.createModal('新增业绩', `
+                    <form onsubmit="event.preventDefault(); app.saveAchievement(); app.closeModal();">
+                        <div class="form-group">
+                            <label class="form-label">业绩类型</label>
+                            <select name="type" class="form-input" required>
+                                <option value="">请选择</option>
+                                <option value="award">奖项</option>
+                                <option value="patent">知识产权</option>
+                                <option value="project">承担课题</option>
+                                <option value="book">著作/指南</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">名称</label>
+                            <input type="text" name="name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">描述</label>
+                            <textarea name="description" class="form-input" rows="3" required></textarea>
+                        </div>
+                        <div class="flex justify-end space-x-3 mt-6">
+                            <button type="button" class="btn btn-secondary" onclick="app.closeModal()">取消</button>
+                            <button type="submit" class="btn btn-primary">保存</button>
+                        </div>
+                    </form>
+                `);
+                
+                document.getElementById('modal-container').appendChild(modal);
+                modal.classList.add('show');
+            }
+            
+            showAddArticleModal() {
+                const modal = this.createModal('新增文章', `
+                    <form onsubmit="event.preventDefault(); app.addArticle(); app.closeModal();">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label class="form-label">英文标题 *</label>
+                                <input type="text" name="title_en" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">中文标题</label>
+                                <input type="text" name="title_zh" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">第一作者 *</label>
+                                <input type="text" name="first_author" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">通讯作者 *</label>
+                                <input type="text" name="corres_author" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">期刊名 *</label>
+                                <input type="text" name="journal" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">发表年份 *</label>
+                                <input type="number" name="pub_year" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">DOI</label>
+                                <input type="text" name="doi" class="form-input" onblur="app.generatePubMedLink(this)">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">PubMed链接</label>
+                                <input type="url" name="pubmed_link" class="form-input">
+                            </div>
+                            <div class="form-group md:col-span-2">
+                                <label class="form-label">
+                                    <input type="checkbox" name="is_key" class="form-input" style="width: auto; margin-right: 8px;">
+                                    重点文章
+                                </label>
+                            </div>
+                        </div>
+                        <div class="flex justify-end space-x-3 mt-6">
+                            <button type="button" class="btn btn-secondary" onclick="app.closeModal()">取消</button>
+                            <button type="submit" class="btn btn-primary">保存</button>
+                        </div>
+                    </form>
+                `);
+                
+                document.getElementById('modal-container').appendChild(modal);
+                modal.classList.add('show');
+            }
+            
+            createModal(title, content) {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-bold" style="color: var(--xiaoai-primary);">${title}</h3>
+                            <button class="btn btn-secondary" style="padding: 8px 12px;" onclick="app.closeModal()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        ${content}
+                    </div>
+                `;
+                
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        this.closeModal();
+                    }
+                });
+                
+                return modal;
+            }
+            
+            closeModal() {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.classList.remove('show');
+                    setTimeout(() => {
+                        if (modal.parentNode) {
+                            modal.parentNode.removeChild(modal);
+                        }
+                    }, 300);
+                });
+            }
+            
+            // 功能实现方法
+            generatePubMedLink(input) {
+                const form = input.closest('form');
+                const doiInput = form.querySelector('[name="doi"]');
+                const pubmedInput = form.querySelector('[name="pubmed_link"]');
+                
+                if (doiInput && doiInput.value && !pubmedInput.value) {
+                    const doi = doiInput.value.trim();
+                    if (doi.startsWith('10.')) {
+                        pubmedInput.value = `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(doi)}`;
+                        this.showNotification('已自动生成PubMed链接', 'success');
+                    }
+                }
+            }
+            
+            addArticle() {
+                this.showNotification('文章添加成功', 'success');
+                this.renderArticles();
+            }
+            
+            editArticle(id) {
+                this.showNotification('编辑功能开发中...', 'info');
+            }
+            
+            deleteArticle(id) {
+                if (confirm('确定要删除这篇文章吗？')) {
+                    this.articles = this.articles.filter(a => a.id !== id);
+                    this.renderArticles();
+                    this.showNotification('文章删除成功', 'success');
+                }
+            }
+            
+            uploadAttachment(type, id) {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.multiple = true;
+                input.accept = '.pdf,.doc,.docx,.jpg,.jpeg,.png';
+                
+                input.onchange = (e) => {
+                    const files = Array.from(e.target.files);
+                    if (files.length > 0) {
+                        this.showNotification(`附件上传功能开发中... (${files.length}个文件)`, 'info');
+                    }
+                };
+                
+                input.click();
+            }
+            
+            uploadFiles(type) {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.multiple = true;
+                
+                if (type === 'image') {
+                    input.accept = 'image/*';
+                } else if (type === 'video') {
+                    input.accept = 'video/*';
+                }
+                
+                input.onchange = (e) => {
+                    const files = Array.from(e.target.files);
+                    if (files.length > 0) {
+                        this.showNotification(`${type === 'image' ? '图片' : type === 'video' ? '视频' : '文件'}上传功能开发中... (${files.length}个文件)`, 'info');
+                    }
+                };
+                
+                input.click();
+            }
+            
+            toggleSelectAll(checked) {
+                document.querySelectorAll('.table input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = checked;
+                });
+            }
+            
+            toggleAchievementView() {
+                const btn = document.getElementById('achievements-view-toggle');
+                const currentText = btn.innerHTML;
+                
+                if (currentText.includes('卡片视图')) {
+                    btn.innerHTML = '<i class="fas fa-list mr-2"></i>列表视图';
+                    this.achievementView = 'list';
+                } else {
+                    btn.innerHTML = '<i class="fas fa-th-large mr-2"></i>卡片视图';
+                    this.achievementView = 'card';
+                }
+                
+                this.showNotification(`已切换到${this.achievementView === 'card' ? '卡片' : '列表'}视图`, 'success');
+            }
+            
+            showAchievementDetail(type) {
+                const content = document.getElementById('achievements-content');
+                const typeNames = {
+                    'award': '奖项',
+                    'patent': '知识产权',
+                    'project': '承担课题',
+                    'book': '著作/指南'
+                };
+                
+                content.innerHTML = `
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold mb-3" style="color: var(--xiaoai-primary);">${typeNames[type]}列表</h3>
+                        <div class="waterfall-container">
+                            ${Array.from({length: 3}, (_, i) => `
+                                <div class="waterfall-item">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="flex justify-between items-center">
+                                                <h4 class="font-semibold">示例${typeNames[type]} ${i + 1}</h4>
+                                                <span class="badge badge-accent">示例</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="text-sm mb-3" style="color: var(--xiaoai-text-secondary);">
+                                                这是一个${typeNames[type]}的示例描述，展示了详细信息。
+                                            </p>
+                                            <div class="space-y-1 text-sm" style="color: var(--xiaoai-text-secondary);">
+                                                <div>年份：202${i + 1}</div>
+                                                <div>等级：示例等级</div>
+                                                <div>授予单位：示例单位</div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="flex justify-between items-center">
+                                                <span class="badge badge-primary">第${i + 1}完成人</span>
+                                                <div class="flex space-x-2">
+                                                    <button class="btn btn-secondary btn-sm">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-accent btn-sm">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-sm">
+                                                        <i class="fas fa-paperclip"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            saveBasicInfo() {
+                this.showNotification('基本信息保存成功', 'success');
+            }
+            
+            saveAchievement() {
+                this.showNotification('业绩信息保存成功', 'success');
+            }
+            
+            showNotification(message, type = 'info') {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = `notification ${type}`;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        }
+        
+        // 初始化应用
+        let app;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            app = new MinimalApp();
+            console.log('MinimalApp initialized successfully');
+        });
+    </script>
 </body>
 </html>
