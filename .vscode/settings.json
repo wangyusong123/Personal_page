@@ -1,0 +1,6 @@
+{
+    // Live Server helpful defaults — only used if Live Server extension is installed
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.root": "/",
+    "liveServer.settings.host": "127.0.0.1"
+}
