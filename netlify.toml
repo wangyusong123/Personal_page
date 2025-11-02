@@ -1,0 +1,8 @@
+[build]
+  command = "echo 'No build step'"   # 纯静态站，无需打包
+  publish = "."                      # 整个仓库根目录就是发布目录
+
+[[redirects]]
+  from = "/api/feishu-token"         # 浏览器访问的 URL 路径
+  to = "/.netlify/functions/feishu-token"  # Netlify 实际去执行的函数
+  status = 200
