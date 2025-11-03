@@ -515,7 +515,9 @@
                             <button class="btn btn-secondary" onclick="app.toggleAchievementView()">
                                 <i class="fas fa-th-large mr-2"></i>卡片视图
                             </button>
-                            <button class="btn btn-primary" onclick="app.showAchievementModal()">
+                            <!-- 问：上面这行每个属性到底干啥？ -->
+<!-- 答：   这个按钮用于切换业绩成果的显示视图，点击后会调用 app.toggleAchievementView() 方法。 -->
+                            <button class="btn btn-primary" onclick="app.showAchievementModal()"> 
                                 <i class="fas fa-plus mr-2"></i>新增业绩
                             </button>
                         </div>
@@ -532,7 +534,8 @@
                                 <div class="text-sm" style="color: var(--xiaoai-text-secondary);">总计 8 项</div>
                             </div>
                         </div>
-
+<!-- 问：下载的按钮都在哪里第几行？ -->
+<!-- 答：   下载的按钮在每个业绩详情的右上角，点击后可以下载该业绩的相关文件。 -->
                         <div class="card" onclick="app.showAchievementDetail('patent')" style="cursor: pointer;">
                             <div class="card-body text-center">
                                 <i class="fas fa-lightbulb text-4xl mb-4" style="color: var(--xiaoai-purple);"></i>
@@ -850,7 +853,9 @@
                                         </button>
                                         <button class="btn btn-accent btn-sm" onclick="app.deleteArticle(${article.id})">
                                             <i class="fas fa-trash"></i>
-                                        </button>
+                                      <!-- 问：下面这行每个属性到底干啥？ -->
+                                      <!-- 答：   这个按钮用于删除对应的学术文章，点击后会调用 app.deleteArticle() 方法，并传入文章的 ID 作为参数。 -->
+                                            </button>
                                         <button class="btn btn-primary btn-sm" onclick="app.uploadAttachment('article', ${article.id})">
                                             <i class="fas fa-paperclip"></i>
                                         </button>
@@ -1191,8 +1196,11 @@
                                                     <button class="btn btn-accent btn-sm">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
-                                                    <button class="btn btn-primary btn-sm">
-                                                        <i class="fas fa-paperclip"></i>
+                                                    <!-- 问：下面两行干嘛的 -->
+                                                    <!-- 答：   这两个按钮分别用于下载和查看对应的学术文章，点击后会调用 app.downloadArticle() 和 app.viewArticle() 方法，并传入文章的 ID 作为参数。 -->
+                                                    <button class="btn btn-primary btn-sm"
+                                                             onclick="downloadFile('{{file_token}}','材料.pdf')">
+                                                         <i class="fas fa-download"></i> 下载
                                                     </button>
                                                 </div>
                                             </div>
@@ -1233,5 +1241,19 @@
             console.log('MinimalApp initialized successfully');
         });
     </script>
+<script>
+async function downloadFile(token, fname) {
+  // 1. 拿租户级 token（函数缓存 2 h）
+  const { tenant_access_token } = await fetch('/api/feishu-token').then(r => r.json());
+  // 2. 换临时直链
+  const url = `https://open.feishu.cn/open-apis/drive/v1/medias/${token}/download`;
+  const down = await fetch(url, { headers: { Authorization: `Bearer ${tenant_access_token}` } }).then(r => r.json());
+  // 3. 立刻触发浏览器下载栏
+  const a = document.createElement('a');
+  a.href = down.download_url;
+  a.download = fname;
+  a.click();
+}
+</script>
 </body>
 </html>
