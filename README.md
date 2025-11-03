@@ -51,3 +51,55 @@ Developer: Reload Window
 - 如果安装后仍然没有反应，请检查：
 	- 工作区是否被“信任”（Workspace Trust），若未信任请点击界面上的提示并选择“信任此工作区”。
 	- 查看 输出（View > Output）面板，右上角下拉选择 “Live Server” 并把日志内容发给我们以便进一步诊断。
+
+## 流程图
+
+```mermaid
+flowchart TD
+    A[开始预览项目] --> B{是否安装 VS Code 任务?}
+    B -- 是 --> C[运行 Start HTTP server (5500)]
+    B -- 否 --> D{是否安装 Python?}
+    D -- 是 --> E[执行 python -m http.server 5500]
+    D -- 否 --> F{是否安装 Node/npm?}
+    F -- 是 --> G[执行 npx http-server -p 5500]
+    F -- 否 --> H[安装任意静态服务器工具]
+    C --> I[浏览器访问 http://127.0.0.1:5500]
+    E --> I
+    G --> I
+    H --> I
+    I --> J[完成]
+```
+
+## 飞书多维表格同步
+
+项目新增了与飞书多维表格的联动：在“资料库同步（飞书）”标签里拖拽 PDF，即可自动上传、OCR 识别，并按类别写入对应表格，页面也会展示最新记录并提供下载按钮。部署前需要在 Netlify 配置以下环境变量：
+
+- `FEISHU_APP_ID`、`FEISHU_APP_SECRET`：飞书自建应用凭据。
+- `FEISHU_APP_TOKEN`：多维表格 Base（应用） token，可从链接 `https://<domain>.feishu.cn/base/<app_token>` 中获取。
+- `FEISHU_DRIVE_FOLDER_TOKEN`：上传 PDF 时存放的飞书云盘文件夹 token，推荐预先创建一个专属文件夹。
+- 表格映射：至少为每个启用的分类设置一个 table id，例如：
+  - `FEISHU_TABLE_PERSONAL`
+  - `FEISHU_TABLE_HONOR`
+  - `FEISHU_TABLE_SOCIETY`
+  - `FEISHU_TABLE_IP`
+  - `FEISHU_TABLE_ARTICLE`
+  - `FEISHU_TABLE_MATERIAL`
+  - `FEISHU_TABLE_BOOK`
+  - `FEISHU_TABLE_PROJECT`
+  - `FEISHU_TABLE_SCIENCE`
+  - `FEISHU_TABLE_TRIAL`
+
+> table id 可通过接口 `GET /open-apis/bitable/v1/apps/{app_token}/tables` 获取，或在多维表格网页端通过“开发者工具→查看 API ID”复制。
+
+上传流程：
+
+1. 前端拖拽或点击上传按钮，向 `/api/feishu-upload` 发送 multipart 请求。
+2. Netlify Function：
+   - 使用凭据换取 `tenant_access_token`；
+   - 调用云盘上传接口 `drive/v1/files/upload_all` 保存 PDF；
+   - 触发 `ocr/v1/file/structure` 获取文本；
+   - 根据关键字映射到对应分类，并调用 `bitable/v1/apps/.../records` 新增记录；
+   - 返回记录 ID、附件 token 等信息。
+3. 前端自动刷新 `/api/feishu-records` 的数据并渲染分类卡片；点击下载时会通过 `/api/feishu-download` 获取临时直链。
+
+如果只想开启部分分类，仅需配置对应 `FEISHU_TABLE_*` 环境变量；未配置的分类页面会显示“暂无数据”。当 OCR 无法准确识别类别时，可进一步完善 `api/feishu-upload.js` 里的 `CATEGORY_MAPPINGS` 关键字映射。

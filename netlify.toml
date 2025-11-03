@@ -6,3 +6,18 @@
   from = "/api/feishu-token"         # 浏览器访问的 URL 路径
   to = "/.netlify/functions/feishu-token"  # Netlify 实际去执行的函数
   status = 200
+
+[[redirects]]
+  from = "/api/feishu-upload"     #
+  to = "/.netlify/functions/feishu-upload"
+  status = 200
+
+[[redirects]]
+  from = "/api/feishu-records"
+  to = "/.netlify/functions/feishu-records"
+  status = 200
+
+[[redirects]]
+  from = "/api/feishu-download"
+  to = "/.netlify/functions/feishu-download"
+  status = 200

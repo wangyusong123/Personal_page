@@ -1,0 +1,20 @@
+name: feishu-MCP
+version: 0.0.1
+schema: v1
+mcpServers:
+  - name: feishu-MCP
+    command: npx
+    args:
+      - -y
+      - "@larksuiteoapi/lark-mcp"
+      - mcp
+      - -a
+      - cli_a9829b2990f4501c
+      - -s
+      - cDmqUHzTlAyUEpKvGHCrGgZuKrSyXn1T
+      - --oauth        # 走官方 OAuth 换 token，省得自己写
+      - -l
+      - zh
+    env: 
+      FEISHU_APP_ID: cli_a9829b2990f4501c
+      FEISHU_APP_SECRET: cDmqUHzTlAyUEpKvGHCrGgZuKrSyXn1T
